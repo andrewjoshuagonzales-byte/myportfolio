@@ -1,15 +1,10 @@
-Here is the completely fixed, integrated, and clean production-ready code for your file.
-
-I have combined the layout configurations, locked down the responsive grid properties to ensure your showcase images scale correctly, and applied the `flex-shrink: 0` fix to ensure your arrow navigation layout stays wide, clear, and perfectly clickable without squeezing.
-
-```astro
 ---
 import Layout from '../layouts/Layout.astro';
 
 const fontAwesomeLink = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css";
 
 const profile = {
-  name: "Andrew Joshua Gonzales",
+  name: "Andrew Joshua Gonzalessss",
   title: "Junior Graphics Designer & Data Analyst",
   avatar: "/profile.jpg", 
   summary: "Junior Graphic Designer and aspiring Data Analyst with a strong foundation in visual design, front-end development, and software quality assurance. Passionate about creating engaging digital content and solving problems through data and design. Adaptable, detail-oriented, and continuously learning new tools and technologies.",
@@ -38,12 +33,13 @@ const skills = {
   ]
 };
 
+// Compact Flash Highlights data mapped from your resume sheet
 const experienceHighlights = [
   {
     id: "exp-qa",
     role: "Data Analyst / QA Tester",
     company: "Southern Philippines Medical Center",
-    period: "Present",
+    period: "",
     icon: "fa-solid fa-chart-pie",
     bullets: [
       "Perform data analysis and reporting to support decision making.",
@@ -56,7 +52,7 @@ const experienceHighlights = [
     id: "exp-design",
     role: "Graphics Designer",
     company: "DecoArts",
-    period: "Previous",
+    period: "",
     icon: "fa-solid fa-palette",
     bullets: [
       "Designed posters, logos, and high-impact social media content.",
@@ -69,7 +65,7 @@ const experienceHighlights = [
     id: "exp-dev",
     role: "Junior Web Developer",
     company: "Altria Call Center Davao",
-    period: "Previous",
+    period: "",
     icon: "fa-solid fa-laptop-code",
     bullets: [
       "Assisted in front-end development using HTML, CSS, and JavaScript framework modules.",
@@ -82,7 +78,7 @@ const experienceHighlights = [
 const futureProjects = [
   { 
     id: "proj-1",
-    title: "Social Media Postings", 
+    title: "Social Media Postings",  
     category: "Graphic Design", 
     desc: "A complete collection of promotional food graphics, product showcases, and social media layout designs.",
     image: "/1.jpg", 
@@ -112,6 +108,7 @@ const futureProjects = [
   
   <main class="portfolio-container">
     
+    <!-- PREMIUM ABOUT ME / HERO BLOCK -->
     <header class="hero">
       <div class="hero-layout">
         <div class="hero-avatar-container">
@@ -141,8 +138,10 @@ const futureProjects = [
       </div>
     </header>
 
+    <!-- EXPANDED MASTER HUB PANEL (Contact + Work Flash Tabs + Tech Skills) -->
     <section class="master-hub-panel">
       
+      <!-- Left Column: Contact and Profile details -->
       <div class="hub-left-deck">
         <div class="hub-contact-column">
           <h3>Contact</h3>
@@ -174,10 +173,12 @@ const futureProjects = [
 
       <div class="hub-vertical-divider"></div>
       
+      <!-- Center Column: FLASH HIGHLIGHTS INTERACTIVE TAB WORK WINDOW -->
       <div class="hub-experience-flash-column">
         <h3>Work Highlights</h3>
         <div class="flash-tabs-container">
-          <div class="flash-tabs-nav" role="tablist" aria-label="Work roles track">
+          <!-- Navigation Sidebar Pills -->
+          <div class="flash-tabs-nav" role="tablist" aria-label="Work roles short track">
             {experienceHighlights.map((exp, idx) => (
               <button 
                 class={`flash-nav-btn ${idx === 0 ? 'active' : ''}`}
@@ -194,6 +195,7 @@ const futureProjects = [
             ))}
           </div>
 
+          <!-- Content Windows displaying facts instantly -->
           <div class="flash-tabs-content-pane">
             {experienceHighlights.map((exp, idx) => (
               <div 
@@ -218,6 +220,7 @@ const futureProjects = [
 
       <div class="hub-vertical-divider"></div>
       
+      <!-- Right Column: Software Skills Column (Large Square App Icons) -->
       <div class="hub-skills-column">
         <h3>Software & Tech Skills</h3>
         <div class="skills-wrapper">
@@ -258,6 +261,7 @@ const futureProjects = [
       </div>
     </section>
 
+    <!-- PROJECT HEADER & GRID BLOCK -->
     <section id="work" class="section-block">
       <div class="section-header-row">
         <div class="header-titles">
@@ -302,6 +306,7 @@ const futureProjects = [
 
   </main>
 
+  <!-- LIGHTBOX MODAL -->
   <dialog id="gallery-modal" class="modal">
     <div class="modal-box">
       <button id="close-modal" class="close-btn" aria-label="Close modal">✕</button>
@@ -327,7 +332,7 @@ const futureProjects = [
 </Layout>
 
 <script>
-  // -- WORK EXPERIENCES TABS MANAGER --
+  // -- FLASH EXPERIENCES INTERACTIVE CONTROLLER --
   const tabButtons = document.querySelectorAll('.flash-nav-btn');
   const contentPanels = document.querySelectorAll('.flash-content-panel');
 
@@ -335,6 +340,7 @@ const futureProjects = [
     button.addEventListener('click', () => {
       const targetId = button.getAttribute('data-target');
 
+      // Update Active Navigation State
       tabButtons.forEach(btn => {
         btn.classList.remove('active');
         btn.setAttribute('aria-selected', 'false');
@@ -342,6 +348,7 @@ const futureProjects = [
       button.classList.add('active');
       button.setAttribute('aria-selected', 'true');
 
+      // Update Panel Display Layout State
       contentPanels.forEach(panel => {
         if (panel.id === targetId) {
           panel.classList.add('active');
@@ -354,7 +361,7 @@ const futureProjects = [
 </script>
 
 <script define:vars={{ futureProjects }}>
-  // -- LIGHTBOX LOGIC RUNTIME --
+  // -- LIGHTBOX CONTROLLER --
   const modal = document.getElementById('gallery-modal');
   const closeModalBtn = document.getElementById('close-modal');
   const projectCards = document.querySelectorAll('.project-card');
@@ -450,7 +457,7 @@ const futureProjects = [
   }
 
   .portfolio-container {
-    max-width: 1400px;
+    max-width: 1400px; /* Expanded slightly to handle the 3-column dashboard nicely */
     margin: 0 auto;
     padding: 4rem 1.5rem;
   }
@@ -542,7 +549,7 @@ const futureProjects = [
   .btn-secondary { border: 1.5px solid var(--border); color: var(--text-main); background: transparent; }
   .btn-secondary:hover { background: var(--border); transform: translateY(-2px); }
 
-  /* --- MASTER HUB PANEL (3-COLUMN DASHBOARD) --- */
+  /* --- MASTER HUB PANEL (3-COLUMN SPLIT DASHBOARD) --- */
   .master-hub-panel {
     display: grid;
     grid-template-columns: 1fr;
@@ -556,7 +563,7 @@ const futureProjects = [
 
   @media (min-width: 1024px) {
     .master-hub-panel {
-      grid-template-columns: 1fr auto 1.8fr auto 1.8fr;
+      grid-template-columns: 1fr auto 1.8fr auto 1.8fr; /* Seamless row mapping across screen workspace */
     }
   }
 
@@ -570,7 +577,7 @@ const futureProjects = [
     letter-spacing: 0.03em;
   }
 
-  /* Contact Items */
+  /* Left Column (Contact) */
   .hub-contact-list { display: flex; flex-direction: column; gap: 1.25rem; }
   .hub-contact-item { display: flex; align-items: center; gap: 1rem; }
   .icon-bubble { width: 40px; height: 40px; background-color: rgba(250, 204, 21, 0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--brand-accent); font-size: 1rem; flex-shrink: 0; }
@@ -582,13 +589,35 @@ const futureProjects = [
   .hub-vertical-divider { display: none; width: 1.5px; background-color: var(--border); align-self: stretch; }
   @media (min-width: 1024px) { .hub-vertical-divider { display: block; } }
 
-  /* Work Experience Flash Tabs */
-  .hub-experience-flash-column { display: flex; flex-direction: column; }
-  .flash-tabs-container { display: flex; flex-direction: column; gap: 1.25rem; height: 100%; }
-  @media (min-width: 640px) { .flash-tabs-container { flex-direction: row; } }
+  /* --- INTERACTIVE FLASH HIGHLIGHTS COMPONENT --- */
+  .hub-experience-flash-column {
+    display: flex;
+    flex-direction: column;
+  }
 
-  .flash-tabs-nav { display: flex; flex-direction: row; gap: 0.5rem; flex-shrink: 0; overflow-x: auto; }
-  @media (min-width: 640px) { .flash-tabs-nav { flex-direction: column; width: 160px; overflow-x: visible; } }
+  .flash-tabs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    height: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .flash-tabs-container { flex-direction: row; }
+  }
+
+  /* Navigation Pillar track buttons */
+  .flash-tabs-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    overflow-x: auto;
+  }
+
+  @media (min-width: 640px) {
+    .flash-tabs-nav { flex-direction: column; width: 160px; overflow-x: visible; }
+  }
 
   .flash-nav-btn {
     background: rgba(255, 255, 255, 0.02);
@@ -604,19 +633,56 @@ const futureProjects = [
     transition: all 0.2s ease;
     width: max-content;
   }
-  @media (min-width: 640px) { .flash-nav-btn { width: 100%; } }
 
-  .flash-nav-btn i { font-size: 1.1rem; flex-shrink: 0; transition: color 0.2s ease; }
-  .btn-text-meta { display: flex; flex-direction: column; }
+  @media (min-width: 640px) {
+    .flash-nav-btn { width: 100%; }
+  }
+
+  .flash-nav-btn i {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+  }
+
+  .btn-text-meta {
+    display: flex;
+    flex-direction: column;
+  }
+
   .role-title-puck { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
   .company-puck { font-size: 0.7rem; color: var(--text-muted); }
 
-  .flash-nav-btn:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.2); }
-  .flash-nav-btn.active { background: rgba(56, 189, 248, 0.08); border-color: var(--brand-primary); color: var(--brand-primary); }
+  .flash-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .flash-nav-btn.active {
+    background: rgba(56, 189, 248, 0.08);
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+  }
+
   .flash-nav-btn.active .role-title-puck { color: var(--brand-primary); }
 
-  .flash-tabs-content-pane { flex: 1; background: rgba(6, 9, 17, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; position: relative; min-height: 200px; }
-  .flash-content-panel { display: none; flex-direction: column; height: 100%; animation: fadeInTab 0.35s ease forwards; }
+  /* Content Display Target Panels */
+  .flash-tabs-content-pane {
+    flex: 1;
+    background: rgba(6, 9, 17, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem;
+    position: relative;
+    min-height: 200px;
+  }
+
+  .flash-content-panel {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    animation: fadeInTab 0.35s ease forwards;
+  }
+
   .flash-content-panel.active { display: flex; }
 
   @keyframes fadeInTab {
@@ -624,7 +690,16 @@ const futureProjects = [
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .panel-header-badge { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; border-bottom: 1px dashed var(--border); padding-bottom: 0.75rem; margin-bottom: 0.85rem; }
+  .panel-header-badge {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
+  }
+
   .panel-header-badge h4 { margin: 0; font-size: 1rem; font-weight: 700; color: #fff; }
   .panel-time-tag { font-size: 0.75rem; color: var(--brand-secondary); background: rgba(192, 132, 252, 0.1); padding: 0.15rem 0.5rem; border-radius: 6px; font-weight: 600; white-space: nowrap; }
 
@@ -632,7 +707,7 @@ const futureProjects = [
   .flash-bullet-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.85rem; line-height: 1.4; color: var(--text-muted); }
   .list-bullet-icon { color: var(--brand-primary); font-size: 0.75rem; margin-top: 0.25rem; flex-shrink: 0; }
 
-  /* Skills Columns Grid System */
+  /* Right Column (Skills Layout System) */
   .hub-skills-column { display: flex; flex-direction: column; gap: 1.5rem; }
   .skills-wrapper { display: flex; flex-direction: column; gap: 1.25rem; }
   .skills-category-group { display: flex; flex-direction: column; gap: 0.75rem; }
@@ -646,7 +721,7 @@ const futureProjects = [
   .standard-app-logo { width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); }
   .skill-app-name { font-size: 0.75rem; font-weight: 600; color: var(--text-main); text-align: center; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  /* --- PROJECT MODULE HEADERS --- */
+  /* --- PROJECT MODULE HEADER --- */
   .section-header-row { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2.5rem; width: 100%; }
   .header-titles { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
   .briefcase-icon-box { width: 48px; height: 48px; background-color: rgba(250, 204, 21, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--brand-accent); font-size: 1.25rem; box-shadow: 0 4px 10px rgba(0,0,0,0.25); }
@@ -683,148 +758,26 @@ const futureProjects = [
   .project-info h3 { margin: 0.45rem 0; font-size: 1.25rem; color: var(--text-main); }
   .project-info p { margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
 
-  /* --- INTERACTIVE LIGHTBOX MODAL (STABLE REBUILD) --- */
-  dialog.modal { 
-    all: unset; 
-    position: fixed; 
-    inset: 0; 
-    display: none; 
-    align-items: center; 
-    justify-content: center; 
-    z-index: 1000; 
-    width: 100vw; 
-    height: 100vh; 
-    box-sizing: border-box; 
-  }
+  /* --- INTERACTIVE LIGHTBOX MODAL --- */
+  dialog.modal { all: unset; position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1000; width: 100vw; height: 100vh; box-sizing: border-box; }
   dialog.modal[open] { display: flex; }
   dialog.modal::backdrop { background: rgba(6, 9, 17, 0.9) !important; backdrop-filter: blur(12px); }
-  
-  .modal-box { 
-    background: var(--panel-bg); 
-    border: 1px solid var(--border); 
-    border-radius: 24px; 
-    padding: 2.5rem; 
-    width: 90%; 
-    max-width: 1100px; 
-    height: 80vh; 
-    max-height: 680px; 
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8); 
-    color: var(--text-main); 
-    position: relative; 
-    box-sizing: border-box; 
-    overflow: hidden; 
-    display: flex;
-    flex-direction: column;
-  }
-  
+  .modal-box { background: var(--panel-bg); border: 1px solid var(--border); border-radius: 24px; padding: 2.5rem; width: 90%; max-width: 950px; max-height: 85vh; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8); color: var(--text-main); position: relative; box-sizing: border-box; overflow-y: auto; }
   .close-btn { position: absolute; top: 1.25rem; right: 1.25rem; background: rgba(6, 9, 17, 0.6); border: 1px solid var(--border); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.2s ease; z-index: 10; }
   .close-btn:hover { background: #ef4444; border-color: #ef4444; color: #ffffff; transform: rotate(90deg); }
-  
-  .modal-layout-split { 
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem; 
-    margin-top: 1rem; 
-    flex: 1;
-    min-height: 0;
-  }
-  @media (min-width: 768px) { 
-    .modal-layout-split { 
-      grid-template-columns: 1.3fr 0.8fr; 
-      align-items: stretch; 
-    } 
-  }
-  
-  .modal-visual-side { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 1rem; 
-    min-height: 0;
-    overflow: hidden;
-  }
-  
-  .modal-info-side { 
-    border-top: 1px solid var(--border); 
-    padding-top: 1.5rem; 
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  @media (min-width: 768px) { 
-    .modal-info-side { 
-      border-top: none; 
-      padding-top: 0; 
-      border-left: 1px solid var(--border); 
-      padding-left: 2rem; 
-    } 
-  }
-  
-  .modal-info-side h3 { margin: 0.5rem 0 1rem 0; font-size: 1.8rem; letter-spacing: -0.02em; line-height: 1.2; color: #ffffff; }
-  .modal-description { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0; }
-  
-  .slider-wrapper { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between;
-    gap: 1rem; 
-    width: 100%;
-    flex: 1; 
-    min-height: 0; 
-  }
-  
-  .slider-display { 
-    flex: 1; 
-    background: #060911 !important; 
-    border: 1px solid var(--border); 
-    border-radius: 16px; 
-    height: 100%; 
-    width: 100%;
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    overflow: hidden; 
-    padding: 0.5rem; 
-    box-sizing: border-box;
-    min-width: 0;
-  }
-  
-  #modal-img { 
-    max-width: 100%; 
-    max-height: 100%; 
-    object-fit: contain; 
-    border-radius: 8px; 
-    display: block;
-  }
-  
-  .slide-nav-btn { 
-    background: #111827; 
-    border: 1px solid var(--border); 
-    color: var(--text-main); 
-    width: 44px; 
-    height: 44px; 
-    border-radius: 12px; 
-    font-size: 1.1rem; 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    transition: all 0.2s ease; 
-    user-select: none; 
-    flex-shrink: 0; /* Prevents arrows from losing layout widths */
-    position: relative;
-    z-index: 20;
-  }
-  .slide-nav-btn:hover { 
-    border-color: var(--brand-primary); 
-    background: var(--border); 
-    color: var(--brand-primary); 
-    box-shadow: 0 0 15px var(--glow); 
-  }
-  
-  .thumbnails-track { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; flex-shrink: 0; }
-  .thumb-pill { width: 55px; height: 40px; object-fit: cover; border-radius: 6px; border: 2px solid var(--border); cursor: pointer; opacity: 0.4; transition: all 0.2s ease; }
+  .modal-layout-split { display: flex; flex-direction: column; gap: 2rem; margin-top: 0.5rem; }
+  @media (min-width: 768px) { .modal-layout-split { flex-direction: row; align-items: flex-start; } }
+  .modal-visual-side { flex: 1.3; width: 100%; display: flex; flex-direction: column; gap: 1rem; }
+  .modal-info-side { flex: 0.8; width: 100%; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+  @media (min-width: 768px) { .modal-info-side { border-top: none; padding-top: 0; border-left: 1px solid var(--border); padding-left: 2rem; position: sticky; top: 0; } }
+  .modal-info-side h3 { margin: 0.5rem 0 1rem 0; font-size: 2rem; letter-spacing: -0.02em; }
+  .modal-description { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin: 0; }
+  .slider-wrapper { display: flex; align-items: center; gap: 1rem; width: 100%; }
+  .slider-display { flex: 1; background: #060911 !important; border: 1px solid var(--border); border-radius: 16px; height: 55vh; max-height: 500px; min-height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.75rem; }
+  #modal-img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
+  .slide-nav-btn { background: #111827; border: 1px solid var(--border); color: var(--text-main); width: 44px; height: 44px; border-radius: 12px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; user-select: none; }
+  .slide-nav-btn:hover { border-color: var(--brand-primary); background: var(--border); color: var(--brand-primary); box-shadow: 0 0 15px var(--glow); }
+  .thumbnails-track { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+  .thumb-pill { width: 60px; height: 45px; object-fit: cover; border-radius: 6px; border: 2px solid var(--border); cursor: pointer; opacity: 0.4; transition: all 0.2s ease; }
   .thumb-pill:hover, .active-thumb { opacity: 1; border-color: var(--brand-primary); transform: translateY(-2px); }
 </style>
-
-```
