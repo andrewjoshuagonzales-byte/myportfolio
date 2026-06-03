@@ -1,3 +1,8 @@
+Here is the completely fixed, integrated, and clean production-ready code for your file.
+
+I have combined the layout configurations, locked down the responsive grid properties to ensure your showcase images scale correctly, and applied the `flex-shrink: 0` fix to ensure your arrow navigation layout stays wide, clear, and perfectly clickable without squeezing.
+
+```astro
 ---
 import Layout from '../layouts/Layout.astro';
 
@@ -33,13 +38,12 @@ const skills = {
   ]
 };
 
-// Compact Flash Highlights data mapped from your resume sheet
 const experienceHighlights = [
   {
     id: "exp-qa",
     role: "Data Analyst / QA Tester",
     company: "Southern Philippines Medical Center",
-    period: "",
+    period: "Present",
     icon: "fa-solid fa-chart-pie",
     bullets: [
       "Perform data analysis and reporting to support decision making.",
@@ -52,7 +56,7 @@ const experienceHighlights = [
     id: "exp-design",
     role: "Graphics Designer",
     company: "DecoArts",
-    period: "",
+    period: "Previous",
     icon: "fa-solid fa-palette",
     bullets: [
       "Designed posters, logos, and high-impact social media content.",
@@ -65,7 +69,7 @@ const experienceHighlights = [
     id: "exp-dev",
     role: "Junior Web Developer",
     company: "Altria Call Center Davao",
-    period: "",
+    period: "Previous",
     icon: "fa-solid fa-laptop-code",
     bullets: [
       "Assisted in front-end development using HTML, CSS, and JavaScript framework modules.",
@@ -108,7 +112,6 @@ const futureProjects = [
   
   <main class="portfolio-container">
     
-    <!-- PREMIUM ABOUT ME / HERO BLOCK -->
     <header class="hero">
       <div class="hero-layout">
         <div class="hero-avatar-container">
@@ -138,10 +141,8 @@ const futureProjects = [
       </div>
     </header>
 
-    <!-- EXPANDED MASTER HUB PANEL (Contact + Work Flash Tabs + Tech Skills) -->
     <section class="master-hub-panel">
       
-      <!-- Left Column: Contact and Profile details -->
       <div class="hub-left-deck">
         <div class="hub-contact-column">
           <h3>Contact</h3>
@@ -173,12 +174,10 @@ const futureProjects = [
 
       <div class="hub-vertical-divider"></div>
       
-      <!-- Center Column: FLASH HIGHLIGHTS INTERACTIVE TAB WORK WINDOW -->
       <div class="hub-experience-flash-column">
         <h3>Work Highlights</h3>
         <div class="flash-tabs-container">
-          <!-- Navigation Sidebar Pills -->
-          <div class="flash-tabs-nav" role="tablist" aria-label="Work roles short track">
+          <div class="flash-tabs-nav" role="tablist" aria-label="Work roles track">
             {experienceHighlights.map((exp, idx) => (
               <button 
                 class={`flash-nav-btn ${idx === 0 ? 'active' : ''}`}
@@ -195,7 +194,6 @@ const futureProjects = [
             ))}
           </div>
 
-          <!-- Content Windows displaying facts instantly -->
           <div class="flash-tabs-content-pane">
             {experienceHighlights.map((exp, idx) => (
               <div 
@@ -220,7 +218,6 @@ const futureProjects = [
 
       <div class="hub-vertical-divider"></div>
       
-      <!-- Right Column: Software Skills Column (Large Square App Icons) -->
       <div class="hub-skills-column">
         <h3>Software & Tech Skills</h3>
         <div class="skills-wrapper">
@@ -261,7 +258,6 @@ const futureProjects = [
       </div>
     </section>
 
-    <!-- PROJECT HEADER & GRID BLOCK -->
     <section id="work" class="section-block">
       <div class="section-header-row">
         <div class="header-titles">
@@ -306,7 +302,6 @@ const futureProjects = [
 
   </main>
 
-  <!-- LIGHTBOX MODAL -->
   <dialog id="gallery-modal" class="modal">
     <div class="modal-box">
       <button id="close-modal" class="close-btn" aria-label="Close modal">✕</button>
@@ -332,7 +327,7 @@ const futureProjects = [
 </Layout>
 
 <script>
-  // -- FLASH EXPERIENCES INTERACTIVE CONTROLLER --
+  // -- WORK EXPERIENCES TABS MANAGER --
   const tabButtons = document.querySelectorAll('.flash-nav-btn');
   const contentPanels = document.querySelectorAll('.flash-content-panel');
 
@@ -340,7 +335,6 @@ const futureProjects = [
     button.addEventListener('click', () => {
       const targetId = button.getAttribute('data-target');
 
-      // Update Active Navigation State
       tabButtons.forEach(btn => {
         btn.classList.remove('active');
         btn.setAttribute('aria-selected', 'false');
@@ -348,7 +342,6 @@ const futureProjects = [
       button.classList.add('active');
       button.setAttribute('aria-selected', 'true');
 
-      // Update Panel Display Layout State
       contentPanels.forEach(panel => {
         if (panel.id === targetId) {
           panel.classList.add('active');
@@ -361,7 +354,7 @@ const futureProjects = [
 </script>
 
 <script define:vars={{ futureProjects }}>
-  // -- LIGHTBOX CONTROLLER --
+  // -- LIGHTBOX LOGIC RUNTIME --
   const modal = document.getElementById('gallery-modal');
   const closeModalBtn = document.getElementById('close-modal');
   const projectCards = document.querySelectorAll('.project-card');
@@ -457,7 +450,7 @@ const futureProjects = [
   }
 
   .portfolio-container {
-    max-width: 1400px; /* Expanded slightly to handle the 3-column dashboard nicely */
+    max-width: 1400px;
     margin: 0 auto;
     padding: 4rem 1.5rem;
   }
@@ -549,7 +542,7 @@ const futureProjects = [
   .btn-secondary { border: 1.5px solid var(--border); color: var(--text-main); background: transparent; }
   .btn-secondary:hover { background: var(--border); transform: translateY(-2px); }
 
-  /* --- MASTER HUB PANEL (3-COLUMN SPLIT DASHBOARD) --- */
+  /* --- MASTER HUB PANEL (3-COLUMN DASHBOARD) --- */
   .master-hub-panel {
     display: grid;
     grid-template-columns: 1fr;
@@ -563,7 +556,7 @@ const futureProjects = [
 
   @media (min-width: 1024px) {
     .master-hub-panel {
-      grid-template-columns: 1fr auto 1.8fr auto 1.8fr; /* Seamless row mapping across screen workspace */
+      grid-template-columns: 1fr auto 1.8fr auto 1.8fr;
     }
   }
 
@@ -577,7 +570,7 @@ const futureProjects = [
     letter-spacing: 0.03em;
   }
 
-  /* Left Column (Contact) */
+  /* Contact Items */
   .hub-contact-list { display: flex; flex-direction: column; gap: 1.25rem; }
   .hub-contact-item { display: flex; align-items: center; gap: 1rem; }
   .icon-bubble { width: 40px; height: 40px; background-color: rgba(250, 204, 21, 0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--brand-accent); font-size: 1rem; flex-shrink: 0; }
@@ -589,35 +582,13 @@ const futureProjects = [
   .hub-vertical-divider { display: none; width: 1.5px; background-color: var(--border); align-self: stretch; }
   @media (min-width: 1024px) { .hub-vertical-divider { display: block; } }
 
-  /* --- INTERACTIVE FLASH HIGHLIGHTS COMPONENT --- */
-  .hub-experience-flash-column {
-    display: flex;
-    flex-direction: column;
-  }
+  /* Work Experience Flash Tabs */
+  .hub-experience-flash-column { display: flex; flex-direction: column; }
+  .flash-tabs-container { display: flex; flex-direction: column; gap: 1.25rem; height: 100%; }
+  @media (min-width: 640px) { .flash-tabs-container { flex-direction: row; } }
 
-  .flash-tabs-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    height: 100%;
-  }
-
-  @media (min-width: 640px) {
-    .flash-tabs-container { flex-direction: row; }
-  }
-
-  /* Navigation Pillar track buttons */
-  .flash-tabs-nav {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    flex-shrink: 0;
-    overflow-x: auto;
-  }
-
-  @media (min-width: 640px) {
-    .flash-tabs-nav { flex-direction: column; width: 160px; overflow-x: visible; }
-  }
+  .flash-tabs-nav { display: flex; flex-direction: row; gap: 0.5rem; flex-shrink: 0; overflow-x: auto; }
+  @media (min-width: 640px) { .flash-tabs-nav { flex-direction: column; width: 160px; overflow-x: visible; } }
 
   .flash-nav-btn {
     background: rgba(255, 255, 255, 0.02);
@@ -633,56 +604,19 @@ const futureProjects = [
     transition: all 0.2s ease;
     width: max-content;
   }
+  @media (min-width: 640px) { .flash-nav-btn { width: 100%; } }
 
-  @media (min-width: 640px) {
-    .flash-nav-btn { width: 100%; }
-  }
-
-  .flash-nav-btn i {
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    transition: color 0.2s ease;
-  }
-
-  .btn-text-meta {
-    display: flex;
-    flex-direction: column;
-  }
-
+  .flash-nav-btn i { font-size: 1.1rem; flex-shrink: 0; transition: color 0.2s ease; }
+  .btn-text-meta { display: flex; flex-direction: column; }
   .role-title-puck { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
   .company-puck { font-size: 0.7rem; color: var(--text-muted); }
 
-  .flash-nav-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .flash-nav-btn.active {
-    background: rgba(56, 189, 248, 0.08);
-    border-color: var(--brand-primary);
-    color: var(--brand-primary);
-  }
-
+  .flash-nav-btn:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.2); }
+  .flash-nav-btn.active { background: rgba(56, 189, 248, 0.08); border-color: var(--brand-primary); color: var(--brand-primary); }
   .flash-nav-btn.active .role-title-puck { color: var(--brand-primary); }
 
-  /* Content Display Target Panels */
-  .flash-tabs-content-pane {
-    flex: 1;
-    background: rgba(6, 9, 17, 0.4);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.25rem;
-    position: relative;
-    min-height: 200px;
-  }
-
-  .flash-content-panel {
-    display: none;
-    flex-direction: column;
-    height: 100%;
-    animation: fadeInTab 0.35s ease forwards;
-  }
-
+  .flash-tabs-content-pane { flex: 1; background: rgba(6, 9, 17, 0.4); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; position: relative; min-height: 200px; }
+  .flash-content-panel { display: none; flex-direction: column; height: 100%; animation: fadeInTab 0.35s ease forwards; }
   .flash-content-panel.active { display: flex; }
 
   @keyframes fadeInTab {
@@ -690,16 +624,7 @@ const futureProjects = [
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .panel-header-badge {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 0.5rem;
-    border-bottom: 1px dashed var(--border);
-    padding-bottom: 0.75rem;
-    margin-bottom: 0.85rem;
-  }
-
+  .panel-header-badge { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; border-bottom: 1px dashed var(--border); padding-bottom: 0.75rem; margin-bottom: 0.85rem; }
   .panel-header-badge h4 { margin: 0; font-size: 1rem; font-weight: 700; color: #fff; }
   .panel-time-tag { font-size: 0.75rem; color: var(--brand-secondary); background: rgba(192, 132, 252, 0.1); padding: 0.15rem 0.5rem; border-radius: 6px; font-weight: 600; white-space: nowrap; }
 
@@ -707,7 +632,7 @@ const futureProjects = [
   .flash-bullet-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.85rem; line-height: 1.4; color: var(--text-muted); }
   .list-bullet-icon { color: var(--brand-primary); font-size: 0.75rem; margin-top: 0.25rem; flex-shrink: 0; }
 
-  /* Right Column (Skills Layout System) */
+  /* Skills Columns Grid System */
   .hub-skills-column { display: flex; flex-direction: column; gap: 1.5rem; }
   .skills-wrapper { display: flex; flex-direction: column; gap: 1.25rem; }
   .skills-category-group { display: flex; flex-direction: column; gap: 0.75rem; }
@@ -721,7 +646,7 @@ const futureProjects = [
   .standard-app-logo { width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); }
   .skill-app-name { font-size: 0.75rem; font-weight: 600; color: var(--text-main); text-align: center; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  /* --- PROJECT MODULE HEADER --- */
+  /* --- PROJECT MODULE HEADERS --- */
   .section-header-row { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2.5rem; width: 100%; }
   .header-titles { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
   .briefcase-icon-box { width: 48px; height: 48px; background-color: rgba(250, 204, 21, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--brand-accent); font-size: 1.25rem; box-shadow: 0 4px 10px rgba(0,0,0,0.25); }
@@ -758,8 +683,7 @@ const futureProjects = [
   .project-info h3 { margin: 0.45rem 0; font-size: 1.25rem; color: var(--text-main); }
   .project-info p { margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
 
-  /* --- INTERACTIVE LIGHTBOX MODAL --- */
-  /* --- INTERACTIVE LIGHTBOX MODAL (TOTAL REBUILD) --- */
+  /* --- INTERACTIVE LIGHTBOX MODAL (STABLE REBUILD) --- */
   dialog.modal { 
     all: unset; 
     position: fixed; 
@@ -806,7 +730,7 @@ const futureProjects = [
   }
   @media (min-width: 768px) { 
     .modal-layout-split { 
-      grid-template-columns: 1.3fr 0.8fr; /* Strictly locks down column widths */
+      grid-template-columns: 1.3fr 0.8fr; 
       align-items: stretch; 
     } 
   }
@@ -838,11 +762,11 @@ const futureProjects = [
   
   .modal-info-side h3 { margin: 0.5rem 0 1rem 0; font-size: 1.8rem; letter-spacing: -0.02em; line-height: 1.2; color: #ffffff; }
   .modal-description { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0; }
-  /* --- FIXES SQUISHED & UNCLICKABLE ARROWS --- */
+  
   .slider-wrapper { 
     display: flex; 
     align-items: center; 
-    justify-content: space-between; /* Evenly spaces arrows around the image box */
+    justify-content: space-between;
     gap: 1rem; 
     width: 100%;
     flex: 1; 
@@ -855,13 +779,22 @@ const futureProjects = [
     border: 1px solid var(--border); 
     border-radius: 16px; 
     height: 100%; 
+    width: 100%;
     display: flex; 
     align-items: center; 
     justify-content: center; 
     overflow: hidden; 
     padding: 0.5rem; 
     box-sizing: border-box;
-    min-width: 0; /* Lets flexbox compress the image container safely instead of buttons */
+    min-width: 0;
+  }
+  
+  #modal-img { 
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
+    border-radius: 8px; 
+    display: block;
   }
   
   .slide-nav-btn { 
@@ -878,9 +811,9 @@ const futureProjects = [
     justify-content: center; 
     transition: all 0.2s ease; 
     user-select: none; 
-    flex-shrink: 0; /* CRITICAL: Absolutely forbids the image from squeezing this button */
+    flex-shrink: 0; /* Prevents arrows from losing layout widths */
     position: relative;
-    z-index: 20; /* Ensures the button sits cleanly on top of any wrapper edges */
+    z-index: 20;
   }
   .slide-nav-btn:hover { 
     border-color: var(--brand-primary); 
@@ -888,18 +821,10 @@ const futureProjects = [
     color: var(--brand-primary); 
     box-shadow: 0 0 15px var(--glow); 
   }
-  #modal-img { 
-    max-width: 100%; 
-    max-height: 100%; 
-    object-fit: contain; 
-    border-radius: 8px; 
-    display: block;
-  }
-  
-  .slide-nav-btn { background: #111827; border: 1px solid var(--border); color: var(--text-main); width: 40px; height: 40px; border-radius: 12px; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; user-select: none; flex-shrink: 0; }
-  .slide-nav-btn:hover { border-color: var(--brand-primary); background: var(--border); color: var(--brand-primary); box-shadow: 0 0 15px var(--glow); }
   
   .thumbnails-track { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; flex-shrink: 0; }
   .thumb-pill { width: 55px; height: 40px; object-fit: cover; border-radius: 6px; border: 2px solid var(--border); cursor: pointer; opacity: 0.4; transition: all 0.2s ease; }
   .thumb-pill:hover, .active-thumb { opacity: 1; border-color: var(--brand-primary); transform: translateY(-2px); }
 </style>
+
+```
