@@ -759,25 +759,111 @@ const futureProjects = [
   .project-info p { margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
 
   /* --- INTERACTIVE LIGHTBOX MODAL --- */
-  dialog.modal { all: unset; position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1000; width: 100vw; height: 100vh; box-sizing: border-box; }
+  /* --- INTERACTIVE LIGHTBOX MODAL (NO SCROLLING GUARANTEE) --- */
+  dialog.modal { 
+    all: unset; 
+    position: fixed; 
+    inset: 0; 
+    display: none; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 1000; 
+    width: 100vw; 
+    height: 100vh; 
+    box-sizing: border-box; 
+  }
   dialog.modal[open] { display: flex; }
   dialog.modal::backdrop { background: rgba(6, 9, 17, 0.9) !important; backdrop-filter: blur(12px); }
-  .modal-box { background: var(--panel-bg); border: 1px solid var(--border); border-radius: 24px; padding: 2.5rem; width: 90%; max-width: 950px; max-height: 85vh; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8); color: var(--text-main); position: relative; box-sizing: border-box; overflow-y: auto; }
+  
+  .modal-box { 
+    background: var(--panel-bg); 
+    border: 1px solid var(--border); 
+    border-radius: 24px; 
+    padding: 2.5rem; 
+    width: 90%; 
+    max-width: 1100px; 
+    height: 80vh; /* Lock down the total height explicitly */
+    max-height: 700px; /* Cap it so it doesn't get ridiculously tall on big screens */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8); 
+    color: var(--text-main); 
+    position: relative; 
+    box-sizing: border-box; 
+    overflow: hidden; /* Hard block on any outer scrolling */
+    display: flex;
+    flex-direction: column;
+  }
+  
   .close-btn { position: absolute; top: 1.25rem; right: 1.25rem; background: rgba(6, 9, 17, 0.6); border: 1px solid var(--border); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.2s ease; z-index: 10; }
   .close-btn:hover { background: #ef4444; border-color: #ef4444; color: #ffffff; transform: rotate(90deg); }
-  .modal-layout-split { display: flex; flex-direction: column; gap: 2rem; margin-top: 0.5rem; }
-  @media (min-width: 768px) { .modal-layout-split { flex-direction: row; align-items: flex-start; } }
-  .modal-visual-side { flex: 1.3; width: 100%; display: flex; flex-direction: column; gap: 1rem; }
-  .modal-info-side { flex: 0.8; width: 100%; border-top: 1px solid var(--border); padding-top: 1.5rem; }
-  @media (min-width: 768px) { .modal-info-side { border-top: none; padding-top: 0; border-left: 1px solid var(--border); padding-left: 2rem; position: sticky; top: 0; } }
+  
+  .modal-layout-split { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 2rem; 
+    margin-top: 0.5rem; 
+    flex: 1; /* Take up all available remaining vertical space */
+    min-height: 0; /* Critical flex fix for inner content height restriction */
+  }
+  @media (min-width: 768px) { 
+    .modal-layout-split { flex-direction: row; align-items: stretch; } 
+  }
+  
+  .modal-visual-side { 
+    flex: 1.4; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1rem; 
+    min-width: 0;
+    min-height: 0; /* Keeps the visual assets bounded */
+  }
+  
+  .modal-info-side { 
+    flex: 0.8; 
+    border-top: 1px solid var(--border); 
+    padding-top: 1.5rem; 
+    overflow-y: auto; /* Only allow text to scroll if description is long */
+  }
+  @media (min-width: 768px) { 
+    .modal-info-side { border-top: none; padding-top: 0; border-left: 1px solid var(--border); padding-left: 2rem; } 
+  }
+  
   .modal-info-side h3 { margin: 0.5rem 0 1rem 0; font-size: 2rem; letter-spacing: -0.02em; }
   .modal-description { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin: 0; }
-  .slider-wrapper { display: flex; align-items: center; gap: 1rem; width: 100%; }
-  .slider-display { flex: 1; background: #060911 !important; border: 1px solid var(--border); border-radius: 16px; height: 55vh; max-height: 500px; min-height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.75rem; }
-  #modal-img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
-  .slide-nav-btn { background: #111827; border: 1px solid var(--border); color: var(--text-main); width: 44px; height: 44px; border-radius: 12px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; user-select: none; }
+  
+  .slider-wrapper { 
+    display: flex; 
+    align-items: center; 
+    gap: 1rem; 
+    width: 100%;
+    flex: 1; /* Allow slider container to dynamically scale down */
+    min-height: 0; 
+  }
+  
+  .slider-display { 
+    flex: 1; 
+    background: #060911 !important; 
+    border: 1px solid var(--border); 
+    border-radius: 16px; 
+    height: 100%; /* Fill the dynamic height provided by slider-wrapper */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; 
+    padding: 1rem; 
+  }
+  
+  #modal-img { 
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; /* Dynamically shrinks image down to fit perfectly */
+    border-radius: 8px; 
+    display: block;
+  }
+  
+  .slide-nav-btn { background: #111827; border: 1px solid var(--border); color: var(--text-main); width: 44px; height: 44px; border-radius: 12px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; user-select: none; flex-shrink: 0; }
   .slide-nav-btn:hover { border-color: var(--brand-primary); background: var(--border); color: var(--brand-primary); box-shadow: 0 0 15px var(--glow); }
-  .thumbnails-track { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+  
+  .thumbnails-track { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; flex-shrink: 0; }
   .thumb-pill { width: 60px; height: 45px; object-fit: cover; border-radius: 6px; border: 2px solid var(--border); cursor: pointer; opacity: 0.4; transition: all 0.2s ease; }
   .thumb-pill:hover, .active-thumb { opacity: 1; border-color: var(--brand-primary); transform: translateY(-2px); }
 </style>
