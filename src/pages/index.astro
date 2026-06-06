@@ -135,7 +135,62 @@ const futureProjects = [
         </div>
       </div>
     </header>
+    <!-- CONTACT DETAILS MODAL -->
+<dialog id="contact-modal" class="modal">
+  <div class="modal-box contact-modal-box">
+    <button id="close-contact-modal" class="close-btn" aria-label="Close contact modal">✕</button>
+    
+    <div class="contact-modal-header">
+      <div class="contact-icon-glow">
+        <i class="fa-solid fa-comments"></i>
+      </div>
+      <h3>Let's Connect!</h3>
+      <p>Pick your preferred platform to start a conversation or discuss a collaboration.</p>
+    </div>
 
+    <div class="contact-channels-grid">
+      <!-- Email -->
+      <a href={`mailto:${profile.contact.email}`} class="channel-card email-card">
+        <div class="channel-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div class="channel-info">
+          <h4>Email Address</h4>
+          <p>{profile.contact.email}</p>
+        </div>
+        <i class="fa-solid fa-chevron-right channel-arrow"></i>
+      </a>
+
+      <!-- Telegram -->
+      <a href="https://t.me/your_telegram_username" target="_blank" rel="noopener noreferrer" class="channel-card telegram-card">
+        <div class="channel-icon"><i class="fa-brands fa-telegram"></i></div>
+        <div class="channel-info">
+          <h4>Telegram</h4>
+          <p>@your_telegram_username</p>
+        </div>
+        <i class="fa-solid fa-chevron-right channel-arrow"></i>
+      </a>
+
+      <!-- Messenger -->
+      <a href="https://m.me/your_messenger_id" target="_blank" rel="noopener noreferrer" class="channel-card messenger-card">
+        <div class="channel-icon"><i class="fa-brands fa-facebook-messenger"></i></div>
+        <div class="channel-info">
+          <h4>Facebook Messenger</h4>
+          <p>Andrew Joshua Gonzales</p>
+        </div>
+        <i class="fa-solid fa-chevron-right channel-arrow"></i>
+      </a>
+
+      <!-- Viber -->
+      <a href="viber://chat?number=%2B639276155874" class="channel-card viber-card">
+        <div class="channel-icon"><i class="fa-brands fa-viber"></i></div>
+        <div class="channel-info">
+          <h4>Viber</h4>
+          <p>+63 927 615 5874</p>
+        </div>
+        <i class="fa-solid fa-chevron-right channel-arrow"></i>
+      </a>
+    </div>
+  </div>
+</dialog>
     <section class="master-hub-panel">
       
       <div class="hub-left-deck">
