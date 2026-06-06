@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import '../styles/portfolio.css';
+import '../styles/portfolio.css'; 
+
 const fontAwesomeLink = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css";
 
 const profile = {
@@ -81,7 +82,7 @@ const futureProjects = [
     category: "Graphic Design", 
     desc: "A complete collection of promotional food graphics, product showcases, and social media layout designs.",
     image: "/1.jpg", 
-    collection: ["/1.jpg","/2.jpg","/3.jpg","/5.jpg","/6.jpg","/b1.png","/b2.png","/b3.png","/b4.png"] 
+    collection: ["/1.jpg","/2.jpg","/3.jpg","/5.jpg","/6.jpg"] 
   },
   { 
     id: "proj-2",
@@ -96,8 +97,8 @@ const futureProjects = [
     title: "Brand Identity Assets", 
     category: "Branding / Logo", 
     desc: "Vector identity assets, clean layout patterns, and high-fidelity project typography showcases.",
-    image: "/l5.png", 
-    collection: ["/l1.png","/l2.png","/l3.png","/l4.png","/l5.png"] 
+    image: "/5.jpg", 
+    collection: ["/1.jpg","/2.jpg","/3.jpg","/5.jpg"] 
   },
 ];
 ---
@@ -127,7 +128,7 @@ const futureProjects = [
           <div class="cta-group">
             <button id="open-contact-modal" class="btn btn-primary">
               <i class="fa-solid fa-paper-plane"></i> Let's Work Together
-              </button>
+            </button>
             <a href="#work" class="btn btn-secondary">
               <i class="fa-solid fa-folder-open"></i> Explore Projects
             </a>
@@ -319,6 +320,58 @@ const futureProjects = [
       </div>
     </div>
   </dialog>
+
+  <dialog id="contact-modal" class="modal">
+    <div class="modal-box contact-modal-box">
+      <button id="close-contact-modal" class="close-btn" aria-label="Close contact modal">✕</button>
+      
+      <div class="contact-modal-header">
+        <div class="contact-icon-glow">
+          <i class="fa-solid fa-comments"></i>
+        </div>
+        <h3>Let's Connect!</h3>
+        <p>Pick your preferred platform to start a conversation or discuss a collaboration.</p>
+      </div>
+
+      <div class="contact-channels-grid">
+        <a href={`mailto:${profile.contact.email}`} class="channel-card email-card">
+          <div class="channel-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="channel-info">
+            <h4>Email Address</h4>
+            <p>{profile.contact.email}</p>
+          </div>
+          <i class="fa-solid fa-chevron-right channel-arrow"></i>
+        </a>
+
+        <a href="https://t.me/your_telegram_username" target="_blank" rel="noopener noreferrer" class="channel-card telegram-card">
+          <div class="channel-icon"><i class="fa-brands fa-telegram"></i></div>
+          <div class="channel-info">
+            <h4>Telegram</h4>
+            <p>@your_telegram_username</p>
+          </div>
+          <i class="fa-solid fa-chevron-right channel-arrow"></i>
+        </a>
+
+        <a href="https://m.me/your_messenger_id" target="_blank" rel="noopener noreferrer" class="channel-card messenger-card">
+          <div class="channel-icon"><i class="fa-brands fa-facebook-messenger"></i></div>
+          <div class="channel-info">
+            <h4>Facebook Messenger</h4>
+            <p>Andrew Joshua Gonzales</p>
+          </div>
+          <i class="fa-solid fa-chevron-right channel-arrow"></i>
+        </a>
+
+        <a href="viber://chat?number=%2B639276155874" class="channel-card viber-card">
+          <div class="channel-icon"><i class="fa-brands fa-viber"></i></div>
+          <div class="channel-info">
+            <h4>Viber</h4>
+            <p>+63 927 615 5874</p>
+          </div>
+          <i class="fa-solid fa-chevron-right channel-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </dialog>
 </Layout>
 
 <script>
@@ -346,10 +399,29 @@ const futureProjects = [
       });
     });
   });
+
+  // -- CONTACT MODAL CONTROLLER --
+  const contactModal = document.getElementById('contact-modal');
+  const openContactBtn = document.getElementById('open-contact-modal');
+  const closeContactBtn = document.getElementById('close-contact-modal');
+
+  if (openContactBtn && contactModal && closeContactBtn) {
+    openContactBtn.addEventListener('click', () => {
+      contactModal.showModal();
+    });
+
+    closeContactBtn.addEventListener('click', () => {
+      contactModal.close();
+    });
+
+    contactModal.addEventListener('click', (e) => {
+      if (e.target === contactModal) contactModal.close();
+    });
+  }
 </script>
 
 <script define:vars={{ futureProjects }}>
-  // -- LIGHTBOX CONTROLLER --
+  // -- LIGHTBOX GALLERY CONTROLLER --
   const modal = document.getElementById('gallery-modal');
   const closeModalBtn = document.getElementById('close-modal');
   const projectCards = document.querySelectorAll('.project-card');
